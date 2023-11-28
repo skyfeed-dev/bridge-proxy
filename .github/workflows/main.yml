@@ -1,0 +1,30 @@
+name: Build on Push
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macOS-latest]
+        include:
+          - os: ubuntu-latest
+            output-name: bridge_proxy_linux
+          - os: macOS-latest
+            output-name: bridge_proxy_mac
+          - os: windows-latest
+            output-name: bridge_proxy_windows.exe
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: dart-lang/setup-dart@v1
+
+      - run: mkdir build
+      - run: dart pub get
+      - run: dart compile exe bin/atproto_bridge_proxy.dart -v -o build/${{ matrix.output-name }}
+      - uses: actions/upload-artifact@v1
+        with:
+          name: native-executables
+          path: build
