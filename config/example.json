@@ -1,0 +1,14 @@
+{
+    "bridge": {
+        "rss": {
+            "following": [
+                "https://blueskyweb.xyz/rss.xml"
+            ]
+        },
+        "youtube": {
+            "following": [
+                "UC5EcK7QV6Z9M70nXoaiJ9BA"
+            ]
+        }
+    }
+}
